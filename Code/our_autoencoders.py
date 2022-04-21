@@ -27,14 +27,14 @@ class DAE_2l:
 
         # 'encoded' is the encoded representation of the input
         encoded = Dense(
-            int(self.input_dim / 8),
+            int(self.input_dim / 4),
             kernel_initializer='glorot_uniform')(input_img)
 
         encoded = BatchNormalization()(encoded)
         encoded = Activation('relu')(encoded)
 
         encoded = Dense(
-            int(self.input_dim / 16),
+            int(self.input_dim / 8),
             kernel_initializer='glorot_uniform')(encoded)
 
         encoded = BatchNormalization()(encoded)
@@ -44,14 +44,14 @@ class DAE_2l:
 
         # 'decoded' is the lossy reconstruction of the input
         decoded = Dense(
-            int(self.input_dim / 16),
+            int(self.input_dim / 8),
             kernel_initializer='glorot_uniform')(encoded)
 
         decoded = BatchNormalization()(decoded)
         decoded = Activation('relu')(decoded)
 
         decoded = Dense(
-            int(self.input_dim / 8),
+            int(self.input_dim / 4),
             kernel_initializer='glorot_uniform')(decoded)
 
         decoded = BatchNormalization()(decoded)
@@ -79,7 +79,7 @@ class DAE_2l:
         self.autoencoder.fit(
             x_train,
             x_train,
-            epochs=999,
+            epochs=9999,
             batch_size=self.batch_size,
             validation_data=(x_valid, x_valid),
             verbose=0,
@@ -146,7 +146,7 @@ class DAE_1l:
         self.autoencoder.fit(
             x_train,
             x_train,
-            epochs=999,
+            epochs=9999,
             batch_size=self.batch_size,
             validation_data=(x_valid, x_valid),
             verbose=0,

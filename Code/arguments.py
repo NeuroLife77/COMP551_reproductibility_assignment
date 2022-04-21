@@ -38,6 +38,7 @@ def get_args():
         'number of dimension (end_dim = start_dim + n_dim) for "dimension" task'
     )
     
+    # Added this to control batch size 
     parser.add_argument(
         '--bsize',
         dest='batch_size',
@@ -47,7 +48,7 @@ def get_args():
         'DAE batch size'
     )
     
-    
+    # Added this to allow for jumps > 1 in dimensionality of the latent space  
     parser.add_argument(
         '--jump',
         dest='jump',
@@ -88,6 +89,7 @@ def get_args():
         action='store_true',
         help='Use a dummy dataset (first 1000 values)')
         
+    # Added this to specify a file name    
     parser.add_argument(
         '-fn',
         '--file_name',
