@@ -59,8 +59,8 @@ if __name__ == '__main__':
         x_test = scaler.transform(x_test)
     else:
         # Normalize values between 0 and 1
-        x_train = (x_train.astype('float32')) / 255.
-        x_test = (x_test.astype('float32')) / 255.
+        x_train = (x_train.astype('float32')) / 255. #Comment out the '/ 255.' to remove normalization
+        x_test = (x_test.astype('float32')) / 255.   #Comment out the '/ 255.' to remove normalization
         # Put images into vectors
         x_train = x_train.reshape((len(x_train), np.prod(x_train.shape[1:])))
         x_test = x_test.reshape((len(x_test), np.prod(x_test.shape[1:])))

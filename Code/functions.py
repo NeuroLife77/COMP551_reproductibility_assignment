@@ -69,12 +69,14 @@ def create_methods(latent_dim, input_shape, batch_size, methods_name):
     if 'dae' in methods_name:
         methods.append(
             DAE(input_shape, batch_size=batch_size, latent_dim=latent_dim))
+    # Added the 2 custom DAE with fewer layers
     if 'dae2l' in methods_name:
         methods.append(
             DAE_2l(input_shape, batch_size=batch_size, latent_dim=latent_dim))
     if 'dae1l' in methods_name:
         methods.append(
             DAE_1l(input_shape, batch_size=batch_size, latent_dim=latent_dim))
+
     if 'vae' in methods_name:
         methods.append(
             VAE(input_shape, batch_size=batch_size, latent_dim=latent_dim))
@@ -116,7 +118,7 @@ def create_classifiers(x_train, y_train, classifiers_name):
         random_search = RandomizedSearchCV(
             KNeighborsClassifier(),
             param_distributions=param_dist,
-            n_iter=20,
+            n_iter=60,
             cv=5,
             n_jobs=-1)
         classifiers.append(random_search.fit(x_train, y_train))
@@ -156,10 +158,11 @@ def dimension_effect(x_train,
             classifiers (in order to obtain a mean and a std of the mean)
         name (str, optional): name of the csv file to write
     '''
-    iterations = 2
+    # Changed the number of iterations to 2 to lower the computational cost 
+    iterations = 5
     print('\nAccuracy and training time w.r.t. the projection size')
     # create file
-    file = open(
+    file = open( #This path below is to store the data on the drive instead of on the temporary storage space of the colab notebook
         '/content/gdrive/MyDrive/ColabNotebooks/dimensionality_reduction/results/Reduced_models/{}_{}_dimension_{:02d}_to_{:02d}.csv'.format(
             methods_name[0],name, latent_dim[0], latent_dim[-1]), 'w')
     writer = csv.writer(file)
